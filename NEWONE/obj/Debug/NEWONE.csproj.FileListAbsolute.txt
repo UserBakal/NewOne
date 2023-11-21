@@ -17,3 +17,22 @@ C:\Users\aldra\OneDrive\Desktop\PSITS COLLECTION SYSTEM\NEWONE\NEWONE\obj\Debug\
 C:\Users\aldra\OneDrive\Desktop\PSITS COLLECTION SYSTEM\NEWONE\NEWONE\obj\Debug\NEWONE.csproj.CopyComplete
 C:\Users\aldra\OneDrive\Desktop\PSITS COLLECTION SYSTEM\NEWONE\NEWONE\obj\Debug\NEWONE.exe
 C:\Users\aldra\OneDrive\Desktop\PSITS COLLECTION SYSTEM\NEWONE\NEWONE\obj\Debug\NEWONE.pdb
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.csproj.AssemblyReference.cache
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.csproj.SuggestedBindingRedirects.cache
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.Form1.resources
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.Form2.resources
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.Form3.resources
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.Form4.resources
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.Properties.Resources.resources
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.csproj.GenerateResource.cache
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.csproj.CoreCompileInputs.cache
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\NEWONE.exe.config
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\NEWONE.exe
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\NEWONE.pdb
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\EntityFramework.dll
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\EntityFramework.xml
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.csproj.CopyComplete
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.exe
+C:\Users\aldra\OneDrive\Desktop\NewOne\NEWONE\obj\Debug\NEWONE.pdb

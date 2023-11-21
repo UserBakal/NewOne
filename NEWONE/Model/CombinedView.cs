@@ -7,15 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.AppData
+namespace NEWONE.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Event
+    public partial class CombinedView
     {
-        public int EventID { get; set; }
+        public int studentID { get; set; }
+        public Nullable<int> Student_IDNumber { get; set; }
+        public string Student_FirstName { get; set; }
+        public string Student_LastName { get; set; }
+        public string Course { get; set; }
+        public Nullable<int> Event_ID { get; set; }
         public string EventName { get; set; }
         public Nullable<System.DateTime> EventDate { get; set; }
+        public string Position { get; set; }
+        public string Name { get; set; }
     }
 }

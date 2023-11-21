@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBSysProjModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBSysProjModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -41,6 +41,23 @@
           <Property Name="psitsId" Type="int" />
           <Property Name="eventId" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CombinedView">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="int" Nullable="false" />
+          <Property Name="Student_IDNumber" Type="int" />
+          <Property Name="Student_FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Student_LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Course" Type="nvarchar" MaxLength="50" />
+          <Property Name="Event_ID" Type="int" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventDate" Type="datetime" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_Student_PSITS">
           <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -70,6 +87,20 @@
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PSITS" EntityType="Self.PSITS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CombinedView" EntityType="Self.CombinedView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CombinedView].[studentID] AS [studentID], 
+    [CombinedView].[Student_IDNumber] AS [Student_IDNumber], 
+    [CombinedView].[Student_FirstName] AS [Student_FirstName], 
+    [CombinedView].[Student_LastName] AS [Student_LastName], 
+    [CombinedView].[Course] AS [Course], 
+    [CombinedView].[Event_ID] AS [Event_ID], 
+    [CombinedView].[EventName] AS [EventName], 
+    [CombinedView].[EventDate] AS [EventDate], 
+    [CombinedView].[Position] AS [Position], 
+    [CombinedView].[Name] AS [Name]
+    FROM [dbo].[CombinedView] AS [CombinedView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
             <End Role="PSITS" EntitySet="PSITS" />
             <End Role="Student" EntitySet="Student" />
@@ -79,24 +110,11 @@
             <End Role="Student1" EntitySet="Student" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSysProjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DBSysProjEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admin" EntityType="DBSysProjModel.Admin" />
-          <EntitySet Name="Event" EntityType="DBSysProjModel.Event" />
-          <EntitySet Name="PSITS" EntityType="DBSysProjModel.PSITS" />
-          <EntitySet Name="Student" EntityType="DBSysProjModel.Student" />
-          <AssociationSet Name="FK_Student_PSITS" Association="DBSysProjModel.FK_Student_PSITS">
-            <End Role="PSITS" EntitySet="PSITS" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Student" Association="DBSysProjModel.FK_Student_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Student1" EntitySet="Student" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -120,7 +138,7 @@
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDNumber" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -133,13 +151,28 @@
           <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="psitsId" Type="Int32" />
           <Property Name="eventId" Type="Int32" />
-          <NavigationProperty Name="PSITS" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
-          <NavigationProperty Name="Student1" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student" ToRole="Student1" />
-          <NavigationProperty Name="Student2" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+          <NavigationProperty Name="PSITS" Relationship="Self.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
+          <NavigationProperty Name="Student1" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Student1" />
+          <NavigationProperty Name="Student2" Relationship="Self.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="CombinedView">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="studentID" Type="Int32" Nullable="false" />
+          <Property Name="Student_IDNumber" Type="Int32" />
+          <Property Name="Student_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Student_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Event_ID" Type="Int32" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Precision="3" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Student_PSITS">
-          <End Type="DBSysProjModel.PSITS" Role="PSITS" Multiplicity="0..1" />
-          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="*" />
+          <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PSITS">
               <PropertyRef Name="psitsID" />
@@ -150,8 +183,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Student">
-          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DBSysProjModel.Student" Role="Student1" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student1" Type="Self.Student" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="studentID" />
@@ -161,49 +194,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="PSITS" EntityType="Self.PSITS" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="CombinedView" EntityType="Self.CombinedView" />
+          <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
+            <End Role="PSITS" EntitySet="PSITS" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Student1" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBSysProjModelStoreContainer" CdmEntityContainer="DBSysProjEntities">
+        <EntityContainerMapping StorageEntityContainer="DBSysProjModelStoreContainer" CdmEntityContainer="DBSysProjEntities1">
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="DBSysProjModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="DBSysProjModel.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PSITS">
             <EntityTypeMapping TypeName="DBSysProjModel.PSITS">
               <MappingFragment StoreEntitySet="PSITS">
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="psitsID" ColumnName="psitsID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="DBSysProjModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="eventId" ColumnName="eventId" />
-                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CombinedView">
+            <EntityTypeMapping TypeName="DBSysProjModel.CombinedView">
+              <MappingFragment StoreEntitySet="CombinedView">
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
+                <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
+                <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Event_ID" ColumnName="Event_ID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.AppData
+namespace NEWONE.Model
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBSysProjEntities : DbContext
+    public partial class DBSysProjEntities1 : DbContext
     {
-        public DBSysProjEntities()
-            : base("name=DBSysProjEntities")
+        public DBSysProjEntities1()
+            : base("name=DBSysProjEntities1")
         {
         }
     
@@ -29,5 +29,6 @@ namespace NEWONE.AppData
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<PSITS> PSITS { get; set; }
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<CombinedView> CombinedView { get; set; }
     }
 }

@@ -40,7 +40,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.cbEvents = new System.Windows.Forms.ComboBox();
             this.txtIdNum = new System.Windows.Forms.TextBox();
@@ -100,7 +100,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.btnCancel);
             this.groupBox2.Controls.Add(this.btnRegister);
             this.groupBox2.Controls.Add(this.cbEvents);
             this.groupBox2.Controls.Add(this.txtIdNum);
@@ -161,15 +161,16 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Events";
             // 
-            // button4
+            // btnCancel
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button4.Location = new System.Drawing.Point(202, 302);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(107, 62);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "CANCEL";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnCancel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnCancel.Location = new System.Drawing.Point(202, 302);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(107, 62);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "CANCEL";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnRegister
             // 
@@ -278,7 +279,7 @@
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
