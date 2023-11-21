@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBCOLLECTIONModelStoreContainer" CdmEntityContainer="DBCOLLECTIONEntities1">
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.Events">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Psits">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.Psits">
+        <MappingFragment StoreEntitySet="Psits">
+          <ScalarProperty Name="PsitsName" ColumnName="PsitsName" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="PsitsPosition" ColumnName="PsitsPosition" />
+          <ScalarProperty Name="PsitsID" ColumnName="PsitsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PsitsEventsView1">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.PsitsEventsView1">
+        <MappingFragment StoreEntitySet="PsitsEventsView1">
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="PsitsPosition" ColumnName="PsitsPosition" />
+          <ScalarProperty Name="PsitsID" ColumnName="PsitsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentEventsView">
+      <EntityTypeMapping TypeName="DBCOLLECTIONModel.StudentEventsView">
+        <MappingFragment StoreEntitySet="StudentEventsView">
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBCOLLECTIONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBCOLLECTIONEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="DBCOLLECTIONModel.Admin" />
+    <EntitySet Name="Events" EntityType="DBCOLLECTIONModel.Events" />
+    <EntitySet Name="Psits" EntityType="DBCOLLECTIONModel.Psits" />
+    <EntitySet Name="Student" EntityType="DBCOLLECTIONModel.Student" />
+    <EntitySet Name="PsitsEventsView1" EntityType="DBCOLLECTIONModel.PsitsEventsView1" />
+    <EntitySet Name="StudentEventsView" EntityType="DBCOLLECTIONModel.StudentEventsView" />
+    <AssociationSet Name="FK__Admin__StudentID__4E88ABD4" Association="DBCOLLECTIONModel.FK__Admin__StudentID__4E88ABD4">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Events__StudentI__5165187F" Association="DBCOLLECTIONModel.FK__Events__StudentI__5165187F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Psits__StudentID__160F4887" Association="DBCOLLECTIONModel.FK__Psits__StudentID__160F4887">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Psits" EntitySet="Psits" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="DBCOLLECTIONModel.FK__Admin__StudentID__4E88ABD4" FromRole="Admin" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EventDate" Type="DateTime" Precision="0" />
+    <Property Name="StudentID" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="DBCOLLECTIONModel.FK__Events__StudentI__5165187F" FromRole="Events" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Psits">
+    <Key>
+      <PropertyRef Name="PsitsID" />
+    </Key>
+    <Property Name="PsitsID" Type="Int32" Nullable="false" />
+    <Property Name="PsitsPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="PsitsName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Student" Relationship="DBCOLLECTIONModel.FK__Psits__StudentID__160F4887" FromRole="Psits" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Admin" Relationship="DBCOLLECTIONModel.FK__Admin__StudentID__4E88ABD4" FromRole="Student" ToRole="Admin" />
+    <NavigationProperty Name="Events" Relationship="DBCOLLECTIONModel.FK__Events__StudentI__5165187F" FromRole="Student" ToRole="Events" />
+    <NavigationProperty Name="Psits" Relationship="DBCOLLECTIONModel.FK__Psits__StudentID__160F4887" FromRole="Student" ToRole="Psits" />
+  </EntityType>
+  <EntityType Name="PsitsEventsView1">
+    <Key>
+      <PropertyRef Name="PsitsID" />
+    </Key>
+    <Property Name="PsitsID" Type="Int32" Nullable="false" />
+    <Property Name="PsitsPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EventDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="StudentEventsView">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EventDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK__Admin__StudentID__4E88ABD4">
+    <End Type="DBCOLLECTIONModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="DBCOLLECTIONModel.Admin" Role="Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Events__StudentI__5165187F">
+    <End Type="DBCOLLECTIONModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="DBCOLLECTIONModel.Events" Role="Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Psits__StudentID__160F4887">
+    <End Type="DBCOLLECTIONModel.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="DBCOLLECTIONModel.Psits" Role="Psits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Psits">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBCOLLECTIONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="int" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="100" />
+    <Property Name="EventDate" Type="date" />
+    <Property Name="StudentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Psits">
+    <Key>
+      <PropertyRef Name="PsitsID" />
+    </Key>
+    <Property Name="PsitsID" Type="int" Nullable="false" />
+    <Property Name="PsitsPosition" Type="varchar" MaxLength="50" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="PsitsName" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Course" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBCOLLECTION.dbo.PsitsEventsView1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="PsitsEventsView1">
+    <Key>
+      <PropertyRef Name="PsitsID" />
+    </Key>
+    <Property Name="PsitsID" Type="int" Nullable="false" />
+    <Property Name="PsitsPosition" Type="varchar" MaxLength="50" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Course" Type="varchar" MaxLength="50" />
+    <Property Name="EventName" Type="varchar" MaxLength="100" />
+    <Property Name="EventDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBCOLLECTION.dbo.StudentEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StudentEventsView">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="Course" Type="varchar" MaxLength="50" />
+    <Property Name="EventID" Type="int" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="100" />
+    <Property Name="EventDate" Type="date" />
+  </EntityType>
+  <Association Name="FK__Admin__StudentID__4E88ABD4">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Events__StudentI__5165187F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Events" Type="Self.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Psits__StudentID__160F4887">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Psits" Type="Self.Psits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Psits">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBCOLLECTIONModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Psits" EntityType="Self.Psits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PsitsEventsView1" EntityType="Self.PsitsEventsView1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PsitsEventsView1].[PsitsID] AS [PsitsID], 
+    [PsitsEventsView1].[PsitsPosition] AS [PsitsPosition], 
+    [PsitsEventsView1].[StudentID] AS [StudentID], 
+    [PsitsEventsView1].[FirstName] AS [FirstName], 
+    [PsitsEventsView1].[LastName] AS [LastName], 
+    [PsitsEventsView1].[Course] AS [Course], 
+    [PsitsEventsView1].[EventName] AS [EventName], 
+    [PsitsEventsView1].[EventDate] AS [EventDate]
+    FROM [dbo].[PsitsEventsView1] AS [PsitsEventsView1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StudentEventsView" EntityType="Self.StudentEventsView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [StudentEventsView].[StudentID] AS [StudentID], 
+    [StudentEventsView].[FirstName] AS [FirstName], 
+    [StudentEventsView].[LastName] AS [LastName], 
+    [StudentEventsView].[Course] AS [Course], 
+    [StudentEventsView].[EventID] AS [EventID], 
+    [StudentEventsView].[EventName] AS [EventName], 
+    [StudentEventsView].[EventDate] AS [EventDate]
+    FROM [dbo].[StudentEventsView] AS [StudentEventsView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Admin__StudentID__4E88ABD4" Association="Self.FK__Admin__StudentID__4E88ABD4">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Admin" EntitySet="Admin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Events__StudentI__5165187F" Association="Self.FK__Events__StudentI__5165187F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Psits__StudentID__160F4887" Association="Self.FK__Psits__StudentID__160F4887">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Psits" EntitySet="Psits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
