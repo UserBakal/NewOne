@@ -53,6 +53,17 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
     <Property Name="Position" Type="nvarchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ViewForPsit">
+          <Property Name="STUDENT_IDNUMBER" Type="int" />
+          <Property Name="STUDENT_FIRSTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="STUDENT_LASTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EVENT_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="EVENT_DATE" Type="datetime" />
+          <Property Name="REGISTER_BY" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
   <Association Name="FK_Student_PSITS">
     <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />

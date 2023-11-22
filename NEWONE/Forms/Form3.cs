@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NEWONE.Repositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,10 +17,14 @@ namespace NEWONE
         {
             InitializeComponent();
         }
-
+        //public void loadgrid()
+        //{
+        //    UserInfo userInfo = new UserInfo();
+        //    grid2.DataSource = userInfo.ViewForPsit1();
+        //}
         private void Form3_Load(object sender, EventArgs e)
         {
-
+            //loadgrid();
         }
     }
 }

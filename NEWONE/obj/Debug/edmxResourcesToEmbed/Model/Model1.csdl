@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBSysProjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="DBSysProjModel.Admin" />
+    <EntitySet Name="Event" EntityType="DBSysProjModel.Event" />
+    <EntitySet Name="PSITS" EntityType="DBSysProjModel.PSITS" />
+    <EntitySet Name="Student" EntityType="DBSysProjModel.Student" />
+    <EntitySet Name="CombinedView" EntityType="DBSysProjModel.CombinedView" />
+    <AssociationSet Name="FK_Student_PSITS" Association="DBSysProjModel.FK_Student_PSITS">
+      <End Role="PSITS" EntitySet="PSITS" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Student" Association="DBSysProjModel.FK_Student_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Student1" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Admin">
     <Key>
       <PropertyRef Name="AdminID" />
@@ -23,7 +38,7 @@
     <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IDNumber" Type="Int32" />
-    <NavigationProperty Name="Student" Relationship="Self.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
+    <NavigationProperty Name="Student" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -36,9 +51,9 @@
     <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="psitsId" Type="Int32" />
     <Property Name="eventId" Type="Int32" />
-    <NavigationProperty Name="PSITS" Relationship="Self.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
-    <NavigationProperty Name="Student1" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Student1" />
-    <NavigationProperty Name="Student2" Relationship="Self.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+    <NavigationProperty Name="PSITS" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
+    <NavigationProperty Name="Student1" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student" ToRole="Student1" />
+    <NavigationProperty Name="Student2" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student1" ToRole="Student" />
   </EntityType>
   <EntityType Name="CombinedView">
     <Key>
@@ -56,8 +71,8 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Student_PSITS">
-    <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
-    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <End Type="DBSysProjModel.PSITS" Role="PSITS" Multiplicity="0..1" />
+    <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PSITS">
         <PropertyRef Name="psitsID" />
@@ -68,8 +83,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Student_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
-    <End Role="Student1" Type="Self.Student" Multiplicity="0..1" />
+    <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="DBSysProjModel.Student" Role="Student1" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="studentID" />
@@ -79,19 +94,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Admin" EntityType="Self.Admin" />
-    <EntitySet Name="Event" EntityType="Self.Event" />
-    <EntitySet Name="PSITS" EntityType="Self.PSITS" />
-    <EntitySet Name="Student" EntityType="Self.Student" />
-    <EntitySet Name="CombinedView" EntityType="Self.CombinedView" />
-    <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
-      <End Role="PSITS" EntitySet="PSITS" />
-      <End Role="Student" EntitySet="Student" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
-      <End Role="Student" EntitySet="Student" />
-      <End Role="Student1" EntitySet="Student" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

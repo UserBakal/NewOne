@@ -4,56 +4,56 @@
     <EntitySetMapping Name="Admin">
       <EntityTypeMapping TypeName="DBSysProjModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
           <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Event">
       <EntityTypeMapping TypeName="DBSysProjModel.Event">
         <MappingFragment StoreEntitySet="Event">
-          <ScalarProperty Name="EventID" ColumnName="EventID" />
-          <ScalarProperty Name="EventName" ColumnName="EventName" />
           <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PSITS">
       <EntityTypeMapping TypeName="DBSysProjModel.PSITS">
         <MappingFragment StoreEntitySet="PSITS">
-          <ScalarProperty Name="psitsID" ColumnName="psitsID" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="psitsID" ColumnName="psitsID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Student">
       <EntityTypeMapping TypeName="DBSysProjModel.Student">
         <MappingFragment StoreEntitySet="Student">
-          <ScalarProperty Name="studentID" ColumnName="studentID" />
-          <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Course" ColumnName="Course" />
-          <ScalarProperty Name="psitsId" ColumnName="psitsId" />
           <ScalarProperty Name="eventId" ColumnName="eventId" />
+          <ScalarProperty Name="psitsId" ColumnName="psitsId" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CombinedView">
       <EntityTypeMapping TypeName="DBSysProjModel.CombinedView">
         <MappingFragment StoreEntitySet="CombinedView">
-          <ScalarProperty Name="studentID" ColumnName="studentID" />
-          <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
-          <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
-          <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
-          <ScalarProperty Name="Course" ColumnName="Course" />
-          <ScalarProperty Name="Event_ID" ColumnName="Event_ID" />
-          <ScalarProperty Name="EventName" ColumnName="EventName" />
-          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="Event_ID" ColumnName="Event_ID" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
+          <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
+          <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

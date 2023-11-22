@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBSysProjModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBSysProjModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -58,6 +58,17 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ViewForPsit">
+          <Property Name="STUDENT_IDNUMBER" Type="int" />
+          <Property Name="STUDENT_FIRSTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="STUDENT_LASTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EVENT_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="EVENT_DATE" Type="datetime" />
+          <Property Name="REGISTER_BY" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <Association Name="FK_Student_PSITS">
           <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -110,11 +121,25 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
             <End Role="Student1" EntitySet="Student" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSysProjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="DBSysProjModel.Admin" />
+          <EntitySet Name="Event" EntityType="DBSysProjModel.Event" />
+          <EntitySet Name="PSITS" EntityType="DBSysProjModel.PSITS" />
+          <EntitySet Name="Student" EntityType="DBSysProjModel.Student" />
+          <EntitySet Name="CombinedView" EntityType="DBSysProjModel.CombinedView" />
+          <AssociationSet Name="FK_Student_PSITS" Association="DBSysProjModel.FK_Student_PSITS">
+            <End Role="PSITS" EntitySet="PSITS" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Student" Association="DBSysProjModel.FK_Student_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Student1" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -138,7 +163,7 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDNumber" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -151,9 +176,9 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="psitsId" Type="Int32" />
           <Property Name="eventId" Type="Int32" />
-          <NavigationProperty Name="PSITS" Relationship="Self.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
-          <NavigationProperty Name="Student1" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Student1" />
-          <NavigationProperty Name="Student2" Relationship="Self.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+          <NavigationProperty Name="PSITS" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
+          <NavigationProperty Name="Student1" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student" ToRole="Student1" />
+          <NavigationProperty Name="Student2" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student1" ToRole="Student" />
         </EntityType>
         <EntityType Name="CombinedView">
           <Key>
@@ -171,8 +196,8 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Student_PSITS">
-          <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="DBSysProjModel.PSITS" Role="PSITS" Multiplicity="0..1" />
+          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PSITS">
               <PropertyRef Name="psitsID" />
@@ -183,8 +208,8 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Student1" Type="Self.Student" Multiplicity="0..1" />
+          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DBSysProjModel.Student" Role="Student1" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="studentID" />
@@ -194,22 +219,7 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admin" EntityType="Self.Admin" />
-          <EntitySet Name="Event" EntityType="Self.Event" />
-          <EntitySet Name="PSITS" EntityType="Self.PSITS" />
-          <EntitySet Name="Student" EntityType="Self.Student" />
-          <EntitySet Name="CombinedView" EntityType="Self.CombinedView" />
-          <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
-            <End Role="PSITS" EntitySet="PSITS" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Student1" EntitySet="Student" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -218,56 +228,56 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="DBSysProjModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
                 <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="DBSysProjModel.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PSITS">
             <EntityTypeMapping TypeName="DBSysProjModel.PSITS">
               <MappingFragment StoreEntitySet="PSITS">
-                <ScalarProperty Name="psitsID" ColumnName="psitsID" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="psitsID" ColumnName="psitsID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="DBSysProjModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="studentID" ColumnName="studentID" />
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
                 <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CombinedView">
             <EntityTypeMapping TypeName="DBSysProjModel.CombinedView">
               <MappingFragment StoreEntitySet="CombinedView">
-                <ScalarProperty Name="studentID" ColumnName="studentID" />
-                <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
-                <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
-                <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="Event_ID" ColumnName="Event_ID" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Event_ID" ColumnName="Event_ID" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
+                <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
+                <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

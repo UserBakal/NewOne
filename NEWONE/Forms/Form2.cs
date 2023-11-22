@@ -94,6 +94,7 @@ namespace NEWONE
                     errorProvider1.SetError(txtCourse, "Empty Field");
                     return;
                 }
+               
 
                 Student nstudent = new Student();
                 nstudent.IDNumber = Convert.ToInt32(txtIdNum.Text);

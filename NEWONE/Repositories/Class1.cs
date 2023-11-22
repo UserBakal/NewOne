@@ -12,6 +12,7 @@ namespace NEWONE.Repositories
     {
         DBSysProjEntities1 db;
         CombinedView CV = new CombinedView();
+        //ViewForPsit VP = new ViewForPsit();
 
         public UserInfo()
         {
@@ -24,6 +25,14 @@ namespace NEWONE.Repositories
                 return db.CombinedView.ToList();
             }
         }
+
+        //public List<ViewForPsit> ViewForPsit1()
+        //{
+        //    using (db = new DBSysProjEntities1())
+        //    {
+        //        return db.ViewForPsit.ToList();
+        //    }
+        //}
 
     }
 
