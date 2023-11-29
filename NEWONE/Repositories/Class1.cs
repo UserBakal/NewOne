@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using NEWONE.Model;
+using NEWONE.Utils;
 
 namespace NEWONE.Repositories
 {
@@ -12,7 +13,7 @@ namespace NEWONE.Repositories
     {
         DBSysProjEntities1 db;
         CombinedView CV = new CombinedView();
-        //ViewForPsit VP = new ViewForPsit();
+        
 
         public UserInfo()
         {
@@ -26,14 +27,33 @@ namespace NEWONE.Repositories
             }
         }
 
-        //public List<ViewForPsit> ViewForPsit1()
-        //{
-        //    using (db = new DBSysProjEntities1())
-        //    {
-        //        return db.ViewForPsit.ToList();
-        //    }
-        //}
+        public List<vw_ViewPsits> vw_ViewPsits()
+        {
+            using (db = new DBSysProjEntities1())
+            {
+                return db.vw_ViewPsits.ToList();
+            }
+        }
+        public ErrorCode DeletePsitsUsingStoredProf(int sId, ref String szResponse)
+        {
+            using (db = new DBSysProjEntities1())
+            {
+                try
+                {
+                    db.sp_DeletePsits(sId);
+                    szResponse = "Deleted";
+                    return ErrorCode.Success;
+                }
+                catch (Exception ex)
+                {
+                    szResponse = ex.Message;
+                    return ErrorCode.Error;
+                }
+                
 
+                  
+            }
+        }
     }
 
 }

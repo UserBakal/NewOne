@@ -19,20 +19,27 @@ namespace NEWONE
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
-            form2.ShowDialog();
+            new Form2().Show();
+            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
-            form3.ShowDialog();
+            new Form3().Show();
+            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form4 form4 = new Form4();  
-            form4.ShowDialog();
+            new Form4().Show();
+            this.Hide();
+        }
+
+        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          
+            new Form1().Show();
+            this.Hide();
         }
     }
 }

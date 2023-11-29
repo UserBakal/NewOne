@@ -59,16 +59,20 @@ warning 6002: The table/view 'DBSysProj.dbo.CombinedView' does not have a primar
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="ViewForPsit">
-          <Property Name="STUDENT_IDNUMBER" Type="int" />
-          <Property Name="STUDENT_FIRSTNAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="STUDENT_LASTNAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
-          <Property Name="EVENT_NAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="EVENT_DATE" Type="datetime" />
-          <Property Name="REGISTER_BY" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
+warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_ViewPsits">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id Number" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="102" Nullable="false" />
+          <Property Name="Course" Type="nvarchar" MaxLength="50" />
+          <Property Name="Event Id" Type="int" />
+          <Property Name="Event Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Event Date" Type="datetime" />
+        </EntityType>
         <Association Name="FK_Student_PSITS">
           <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -93,6 +97,9 @@ warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_DeletePsits" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBSysProjModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
@@ -111,6 +118,17 @@ warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary
     [CombinedView].[Position] AS [Position], 
     [CombinedView].[Name] AS [Name]
     FROM [dbo].[CombinedView] AS [CombinedView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_ViewPsits" EntityType="Self.vw_ViewPsits" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ViewPsits].[Id] AS [Id], 
+    [vw_ViewPsits].[Id Number] AS [Id Number], 
+    [vw_ViewPsits].[Name] AS [Name], 
+    [vw_ViewPsits].[Course] AS [Course], 
+    [vw_ViewPsits].[Event Id] AS [Event Id], 
+    [vw_ViewPsits].[Event Name] AS [Event Name], 
+    [vw_ViewPsits].[Event Date] AS [Event Date]
+    FROM [dbo].[vw_ViewPsits] AS [vw_ViewPsits]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
             <End Role="PSITS" EntitySet="PSITS" />
@@ -139,6 +157,10 @@ warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary
             <End Role="Student" EntitySet="Student" />
             <End Role="Student1" EntitySet="Student" />
           </AssociationSet>
+          <FunctionImport Name="sp_DeletePsits">
+          <Parameter Name="pId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="vw_ViewPsits" EntityType="DBSysProjModel.vw_ViewPsits" />
         </EntityContainer>
         <EntityType Name="Admin">
           <Key>
@@ -219,6 +241,19 @@ warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_ViewPsits">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_Number" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Event_Id" Type="Int32" />
+          <Property Name="Event_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Event_Date" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -278,6 +313,20 @@ warning 6013: The table/view 'DBSysProj.dbo.ViewForPsit' does not have a primary
                 <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
                 <ScalarProperty Name="Student_IDNumber" ColumnName="Student_IDNumber" />
                 <ScalarProperty Name="studentID" ColumnName="studentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DeletePsits" FunctionName="DBSysProjModel.Store.sp_DeletePsits" />
+          <EntitySetMapping Name="vw_ViewPsits">
+            <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewPsits">
+              <MappingFragment StoreEntitySet="vw_ViewPsits">
+                <ScalarProperty Name="Event_Date" ColumnName="Event Date" />
+                <ScalarProperty Name="Event_Name" ColumnName="Event Name" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event Id" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_Number" ColumnName="Id Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

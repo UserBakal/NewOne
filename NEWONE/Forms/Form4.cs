@@ -35,8 +35,11 @@ namespace NEWONE
         {
            
         }
-       
-        
 
+        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Form1().Show();
+            this.Hide();
+        }
     }
 }

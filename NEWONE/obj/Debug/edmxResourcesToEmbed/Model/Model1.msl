@@ -57,5 +57,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_DeletePsits" FunctionName="DBSysProjModel.Store.sp_DeletePsits" />
+    <EntitySetMapping Name="vw_ViewPsits">
+      <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewPsits">
+        <MappingFragment StoreEntitySet="vw_ViewPsits">
+          <ScalarProperty Name="Event_Date" ColumnName="Event Date" />
+          <ScalarProperty Name="Event_Name" ColumnName="Event Name" />
+          <ScalarProperty Name="Event_Id" ColumnName="Event Id" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id_Number" ColumnName="Id Number" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

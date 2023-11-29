@@ -124,5 +124,11 @@ namespace NEWONE
             this.Close();
             new Form1().Show();
         }
+
+        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Form1().Show();
+            this.Hide();
+        }
     }
 }

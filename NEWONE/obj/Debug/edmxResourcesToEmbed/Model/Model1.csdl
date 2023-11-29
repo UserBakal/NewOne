@@ -14,6 +14,10 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="Student1" EntitySet="Student" />
     </AssociationSet>
+    <FunctionImport Name="sp_DeletePsits">
+      <Parameter Name="pId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="vw_ViewPsits" EntityType="DBSysProjModel.vw_ViewPsits" />
   </EntityContainer>
   <EntityType Name="Admin">
     <Key>
@@ -94,4 +98,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="vw_ViewPsits">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id_Number" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Event_Id" Type="Int32" />
+    <Property Name="Event_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Event_Date" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

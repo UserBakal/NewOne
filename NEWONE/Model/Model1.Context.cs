@@ -12,6 +12,8 @@ namespace NEWONE.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBSysProjEntities1 : DbContext
     {
@@ -30,5 +32,15 @@ namespace NEWONE.Model
         public virtual DbSet<PSITS> PSITS { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<CombinedView> CombinedView { get; set; }
+        public virtual DbSet<vw_ViewPsits> vw_ViewPsits { get; set; }
+    
+        public virtual int sp_DeletePsits(Nullable<int> pId)
+        {
+            var pIdParameter = pId.HasValue ?
+                new ObjectParameter("pId", pId) :
+                new ObjectParameter("pId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeletePsits", pIdParameter);
+        }
     }
 }
