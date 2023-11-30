@@ -21,5 +21,8 @@ namespace NEWONE.Model
         public Nullable<int> Event_Id { get; set; }
         public string Event_Name { get; set; }
         public Nullable<System.DateTime> Event_Date { get; set; }
+        public int IDNumber { get; internal set; }
+        public int LastName { get; internal set; }
+        public int FirstName { get; internal set; }
     }
 }

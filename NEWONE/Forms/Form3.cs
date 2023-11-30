@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NEWONE.Model;
-using NEWONE.Repositories;
 
 namespace NEWONE
 {
@@ -75,7 +74,12 @@ namespace NEWONE
 
         private void txtStudentId_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
+
+
+
+
+
     }
 }

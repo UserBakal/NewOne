@@ -12,7 +12,6 @@ namespace NEWONE.Repositories
     internal class UserInfo
     {
         DBSysProjEntities1 db;
-        CombinedView CV = new CombinedView();
         
 
         public UserInfo()
