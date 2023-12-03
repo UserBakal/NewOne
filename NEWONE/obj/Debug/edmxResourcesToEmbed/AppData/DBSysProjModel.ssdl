@@ -50,25 +50,29 @@ warning 6002: The table/view 'DBSysProj.dbo.VW_ADMIN3' does not have a primary k
     <Property Name="EventDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="VW_PSITS2">
+warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS4' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_PSITS4">
     <Key>
-      <PropertyRef Name="StudentName" />
-    </Key>
-    <Property Name="StudentName" Type="nvarchar" MaxLength="117" Nullable="false" />
-    <Property Name="EventName" Type="nvarchar" MaxLength="50" />
-    <Property Name="EventDate" Type="datetime" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS3' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="VW_PSITS3">
-    <Key>
+      <PropertyRef Name="studentID" />
       <PropertyRef Name="STUDENTs_Name" />
     </Key>
+    <Property Name="studentID" Type="int" Nullable="false" />
     <Property Name="STUDENTs_Name" Type="nvarchar" MaxLength="117" Nullable="false" />
     <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
     <Property Name="EventName" Type="nvarchar" MaxLength="50" />
     <Property Name="EventDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DBSysProj.dbo.vw_ViewAdmin1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_ViewAdmin1">
+    <Key>
+      <PropertyRef Name="PSITS_OFFICERS" />
+      <PropertyRef Name="STUDENTS" />
+      <PropertyRef Name="EVENTS" />
+    </Key>
+    <Property Name="PSITS_OFFICERS" Type="nvarchar" MaxLength="102" Nullable="false" />
+    <Property Name="STUDENTS" Type="nvarchar" MaxLength="169" Nullable="false" />
+    <Property Name="EVENTS" Type="nvarchar" MaxLength="92" Nullable="false" />
   </EntityType>
   <Association Name="FK_Student_PSITS">
     <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
@@ -97,6 +101,9 @@ warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS3' does not have a primary k
   <Function Name="sp_DeletePsits" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="pId" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_DeleteStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sId" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="DBSysProjModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
@@ -111,20 +118,21 @@ warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS3' does not have a primary k
     [VW_ADMIN3].[EventDate] AS [EventDate]
     FROM [dbo].[VW_ADMIN3] AS [VW_ADMIN3]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="VW_PSITS2" EntityType="Self.VW_PSITS2" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="VW_PSITS4" EntityType="Self.VW_PSITS4" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [VW_PSITS2].[StudentName] AS [StudentName], 
-    [VW_PSITS2].[EventName] AS [EventName], 
-    [VW_PSITS2].[EventDate] AS [EventDate]
-    FROM [dbo].[VW_PSITS2] AS [VW_PSITS2]</DefiningQuery>
+    [VW_PSITS4].[studentID] AS [studentID], 
+    [VW_PSITS4].[STUDENTs_Name] AS [STUDENTs_Name], 
+    [VW_PSITS4].[COURSE] AS [COURSE], 
+    [VW_PSITS4].[EventName] AS [EventName], 
+    [VW_PSITS4].[EventDate] AS [EventDate]
+    FROM [dbo].[VW_PSITS4] AS [VW_PSITS4]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="VW_PSITS3" EntityType="Self.VW_PSITS3" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="vw_ViewAdmin1" EntityType="Self.vw_ViewAdmin1" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [VW_PSITS3].[STUDENTs_Name] AS [STUDENTs_Name], 
-    [VW_PSITS3].[COURSE] AS [COURSE], 
-    [VW_PSITS3].[EventName] AS [EventName], 
-    [VW_PSITS3].[EventDate] AS [EventDate]
-    FROM [dbo].[VW_PSITS3] AS [VW_PSITS3]</DefiningQuery>
+    [vw_ViewAdmin1].[PSITS_OFFICERS] AS [PSITS_OFFICERS], 
+    [vw_ViewAdmin1].[STUDENTS] AS [STUDENTS], 
+    [vw_ViewAdmin1].[EVENTS] AS [EVENTS]
+    FROM [dbo].[vw_ViewAdmin1] AS [vw_ViewAdmin1]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
       <End Role="PSITS" EntitySet="PSITS" />

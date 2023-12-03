@@ -7,14 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.Model
+namespace NEWONE.AppData
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class VW_ADMIN3
     {
-        public int AdminID { get; set; }
-        public string AdminName { get; set; }
+        public string PSITS_Officers { get; set; }
+        public string STUDENTs_Name { get; set; }
+        public string COURSE { get; set; }
+        public string EventName { get; set; }
+        public Nullable<System.DateTime> EventDate { get; set; }
     }
 }

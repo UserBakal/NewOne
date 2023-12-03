@@ -42,21 +42,33 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_DeletePsits" FunctionName="DBSysProjModel.Store.sp_DeletePsits" />
-    <EntitySetMapping Name="vw_ViewAdmin1">
-      <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewAdmin1">
-        <MappingFragment StoreEntitySet="vw_ViewAdmin1">
-          <ScalarProperty Name="EVENTS" ColumnName="EVENTS" />
-          <ScalarProperty Name="STUDENTS" ColumnName="STUDENTS" />
-          <ScalarProperty Name="PSITS_OFFICERS" ColumnName="PSITS_OFFICERS" />
+    <EntitySetMapping Name="VW_PSITS2">
+      <EntityTypeMapping TypeName="DBSysProjModel.VW_PSITS2">
+        <MappingFragment StoreEntitySet="VW_PSITS2">
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="StudentName" ColumnName="StudentName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vw_ViewPsits1">
-      <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewPsits1">
-        <MappingFragment StoreEntitySet="vw_ViewPsits1">
+    <EntitySetMapping Name="VW_ADMIN3">
+      <EntityTypeMapping TypeName="DBSysProjModel.VW_ADMIN3">
+        <MappingFragment StoreEntitySet="VW_ADMIN3">
           <ScalarProperty Name="EventDate" ColumnName="EventDate" />
           <ScalarProperty Name="EventName" ColumnName="EventName" />
-          <ScalarProperty Name="Students" ColumnName="Students" />
+          <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+          <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
+          <ScalarProperty Name="PSITS_Officers" ColumnName="PSITS_Officers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_PSITS3">
+      <EntityTypeMapping TypeName="DBSysProjModel.VW_PSITS3">
+        <MappingFragment StoreEntitySet="VW_PSITS3">
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+          <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

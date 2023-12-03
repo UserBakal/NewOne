@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.Model
+namespace NEWONE.AppData
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_ViewAdmin1
+    public partial class Admin
     {
-        public string PSITS_OFFICERS { get; set; }
-        public string STUDENTS { get; set; }
-        public string EVENTS { get; set; }
+        public int AdminID { get; set; }
+        public string AdminName { get; set; }
     }
 }

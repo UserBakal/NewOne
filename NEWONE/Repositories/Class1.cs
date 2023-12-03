@@ -2,40 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using NEWONE.Model;
+using NEWONE.AppData;
 using NEWONE.Utils;
 
 namespace NEWONE.Repositories
 {
     internal class UserInfo
     {
-        DBSysProjEntities1 db;
+        DBSysProjEntities2 db;
         
 
         public UserInfo()
         {
-            db = new DBSysProjEntities1();
+            db = new DBSysProjEntities2();
         }
-        public List<vw_ViewAdmin1> combinedViews1()
+        public List<VW_ADMIN3> combinedViews1()
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
             {
-                return db.vw_ViewAdmin1.ToList();
+                return db.VW_ADMIN3.ToList();
             }
         }
 
-        public List<vw_ViewPsits1> vw_ViewPsits()
+        public List<VW_PSITS4> vw_ViewPsits()
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
             {
-                return db.vw_ViewPsits1.ToList();
+                return db.VW_PSITS4.ToList();
             }
         }
         public ErrorCode DeletePsitsUsingStoredProf(int sId, ref String szResponse)
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
             {
                 try
                 {
@@ -47,10 +48,24 @@ namespace NEWONE.Repositories
                 {
                     szResponse = ex.Message;
                     return ErrorCode.Error;
+                }        
+            }
+        }
+        public ErrorCode DeleteStudentUsingStoredProf(int sId, ref String szResponse)
+        {
+            using (db = new DBSysProjEntities2())
+            {
+                try
+                {
+                    db.sp_DeleteStudent(sId);
+                    szResponse = "Deleted";
+                    return ErrorCode.Success;
                 }
-                
-
-                  
+                catch (Exception ex)
+                {
+                    szResponse = ex.Message;
+                    return ErrorCode.Error;
+                }
             }
         }
     }

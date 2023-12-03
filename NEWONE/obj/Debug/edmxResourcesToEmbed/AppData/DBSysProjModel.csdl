@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBSysProjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="PSITS">
+    <Key>
+      <PropertyRef Name="psitsID" />
+    </Key>
+    <Property Name="psitsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDNumber" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDNumber" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="psitsId" Type="Int32" />
+    <Property Name="eventId" Type="Int32" />
+    <NavigationProperty Name="PSITS" Relationship="Self.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
+    <NavigationProperty Name="Student1" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Student1" />
+    <NavigationProperty Name="Student2" Relationship="Self.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="VW_ADMIN3">
+    <Key>
+      <PropertyRef Name="PSITS_Officers" />
+      <PropertyRef Name="STUDENTs_Name" />
+    </Key>
+    <Property Name="PSITS_Officers" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="STUDENTs_Name" Type="String" MaxLength="117" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vw_ViewAdmin1">
+    <Key>
+      <PropertyRef Name="PSITS_OFFICERS" />
+      <PropertyRef Name="STUDENTS" />
+      <PropertyRef Name="EVENTS" />
+    </Key>
+    <Property Name="PSITS_OFFICERS" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="STUDENTS" Type="String" MaxLength="169" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EVENTS" Type="String" MaxLength="92" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Student_PSITS">
+    <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PSITS">
+        <PropertyRef Name="psitsID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="psitsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student1" Type="Self.Student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="Student1">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBSysProjEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Event" EntityType="Self.Event" />
+    <EntitySet Name="PSITS" EntityType="Self.PSITS" />
+    <EntitySet Name="Student" EntityType="Self.Student" />
+    <EntitySet Name="VW_ADMIN3" EntityType="Self.VW_ADMIN3" />
+    <EntitySet Name="vw_ViewAdmin1" EntityType="Self.vw_ViewAdmin1" />
+    <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
+      <End Role="PSITS" EntitySet="PSITS" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Student1" EntitySet="Student" />
+    </AssociationSet>
+    <FunctionImport Name="sp_DeletePsits">
+      <Parameter Name="pId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteStudent">
+      <Parameter Name="sId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="VW_PSITS4" EntityType="DBSysProjModel.VW_PSITS4" />
+  </EntityContainer>
+  <EntityType Name="VW_PSITS4">
+    <Key>
+      <PropertyRef Name="studentID" />
+      <PropertyRef Name="STUDENTs_Name" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="STUDENTs_Name" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

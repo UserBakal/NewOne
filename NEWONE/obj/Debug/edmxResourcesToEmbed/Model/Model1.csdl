@@ -16,8 +16,9 @@
     <FunctionImport Name="sp_DeletePsits">
       <Parameter Name="pId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="vw_ViewAdmin1" EntityType="DBSysProjModel.vw_ViewAdmin1" />
-    <EntitySet Name="vw_ViewPsits1" EntityType="DBSysProjModel.vw_ViewPsits1" />
+    <EntitySet Name="VW_PSITS2" EntityType="DBSysProjModel.VW_PSITS2" />
+    <EntitySet Name="VW_ADMIN3" EntityType="DBSysProjModel.VW_ADMIN3" />
+    <EntitySet Name="VW_PSITS3" EntityType="DBSysProjModel.VW_PSITS3" />
   </EntityContainer>
   <EntityType Name="Admin">
     <Key>
@@ -83,21 +84,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="vw_ViewAdmin1">
+  <EntityType Name="VW_PSITS2">
     <Key>
-      <PropertyRef Name="PSITS_OFFICERS" />
-      <PropertyRef Name="STUDENTS" />
-      <PropertyRef Name="EVENTS" />
+      <PropertyRef Name="StudentName" />
     </Key>
-    <Property Name="PSITS_OFFICERS" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
-    <Property Name="STUDENTS" Type="String" Nullable="false" MaxLength="169" FixedLength="false" Unicode="true" />
-    <Property Name="EVENTS" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="true" />
+    <Property Name="StudentName" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="vw_ViewPsits1">
+  <EntityType Name="VW_ADMIN3">
     <Key>
-      <PropertyRef Name="Students" />
+      <PropertyRef Name="PSITS_Officers" />
+      <PropertyRef Name="STUDENTs_Name" />
     </Key>
-    <Property Name="Students" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="PSITS_Officers" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
+    <Property Name="STUDENTs_Name" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="VW_PSITS3">
+    <Key>
+      <PropertyRef Name="STUDENTs_Name" />
+    </Key>
+    <Property Name="STUDENTs_Name" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EventDate" Type="DateTime" Precision="3" />
   </EntityType>

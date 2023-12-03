@@ -42,6 +42,32 @@
           <Property Name="eventId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBSysProj.dbo.VW_ADMIN3' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_ADMIN3">
+          <Key>
+            <PropertyRef Name="PSITS_Officers" />
+            <PropertyRef Name="STUDENTs_Name" />
+          </Key>
+          <Property Name="PSITS_Officers" Type="nvarchar" MaxLength="102" Nullable="false" />
+          <Property Name="STUDENTs_Name" Type="nvarchar" MaxLength="117" Nullable="false" />
+          <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBSysProj.dbo.VW_PSITS4' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_PSITS4">
+          <Key>
+            <PropertyRef Name="studentID" />
+            <PropertyRef Name="STUDENTs_Name" />
+          </Key>
+          <Property Name="studentID" Type="int" Nullable="false" />
+          <Property Name="STUDENTs_Name" Type="nvarchar" MaxLength="117" Nullable="false" />
+          <Property Name="COURSE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBSysProj.dbo.vw_ViewAdmin1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_ViewAdmin1">
           <Key>
@@ -52,16 +78,6 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewAdmin1' does not have a prima
           <Property Name="PSITS_OFFICERS" Type="nvarchar" MaxLength="102" Nullable="false" />
           <Property Name="STUDENTS" Type="nvarchar" MaxLength="169" Nullable="false" />
           <Property Name="EVENTS" Type="nvarchar" MaxLength="92" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vw_ViewPsits1">
-          <Key>
-            <PropertyRef Name="Students" />
-          </Key>
-          <Property Name="Students" Type="nvarchar" MaxLength="117" Nullable="false" />
-          <Property Name="EventName" Type="nvarchar" MaxLength="50" />
-          <Property Name="EventDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_Student_PSITS">
           <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
@@ -90,24 +106,38 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
         <Function Name="sp_DeletePsits" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pId" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_DeleteStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBSysProjModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PSITS" EntityType="Self.PSITS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_ADMIN3" EntityType="Self.VW_ADMIN3" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_ADMIN3].[PSITS_Officers] AS [PSITS_Officers], 
+    [VW_ADMIN3].[STUDENTs_Name] AS [STUDENTs_Name], 
+    [VW_ADMIN3].[COURSE] AS [COURSE], 
+    [VW_ADMIN3].[EventName] AS [EventName], 
+    [VW_ADMIN3].[EventDate] AS [EventDate]
+    FROM [dbo].[VW_ADMIN3] AS [VW_ADMIN3]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_PSITS4" EntityType="Self.VW_PSITS4" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_PSITS4].[studentID] AS [studentID], 
+    [VW_PSITS4].[STUDENTs_Name] AS [STUDENTs_Name], 
+    [VW_PSITS4].[COURSE] AS [COURSE], 
+    [VW_PSITS4].[EventName] AS [EventName], 
+    [VW_PSITS4].[EventDate] AS [EventDate]
+    FROM [dbo].[VW_PSITS4] AS [VW_PSITS4]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_ViewAdmin1" EntityType="Self.vw_ViewAdmin1" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_ViewAdmin1].[PSITS_OFFICERS] AS [PSITS_OFFICERS], 
     [vw_ViewAdmin1].[STUDENTS] AS [STUDENTS], 
     [vw_ViewAdmin1].[EVENTS] AS [EVENTS]
     FROM [dbo].[vw_ViewAdmin1] AS [vw_ViewAdmin1]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="vw_ViewPsits1" EntityType="Self.vw_ViewPsits1" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vw_ViewPsits1].[Students] AS [Students], 
-    [vw_ViewPsits1].[EventName] AS [EventName], 
-    [vw_ViewPsits1].[EventDate] AS [EventDate]
-    FROM [dbo].[vw_ViewPsits1] AS [vw_ViewPsits1]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
             <End Role="PSITS" EntitySet="PSITS" />
@@ -122,25 +152,6 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSysProjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DBSysProjEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admin" EntityType="DBSysProjModel.Admin" />
-          <EntitySet Name="Event" EntityType="DBSysProjModel.Event" />
-          <EntitySet Name="PSITS" EntityType="DBSysProjModel.PSITS" />
-          <EntitySet Name="Student" EntityType="DBSysProjModel.Student" />
-          <AssociationSet Name="FK_Student_PSITS" Association="DBSysProjModel.FK_Student_PSITS">
-            <End Role="PSITS" EntitySet="PSITS" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Student" Association="DBSysProjModel.FK_Student_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Student1" EntitySet="Student" />
-          </AssociationSet>
-          <FunctionImport Name="sp_DeletePsits">
-          <Parameter Name="pId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="vw_ViewAdmin1" EntityType="DBSysProjModel.vw_ViewAdmin1" />
-          <EntitySet Name="vw_ViewPsits1" EntityType="DBSysProjModel.vw_ViewPsits1" />
-          </EntityContainer>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -164,7 +175,7 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDNumber" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_PSITS" FromRole="PSITS" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -177,13 +188,34 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
           <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="psitsId" Type="Int32" />
           <Property Name="eventId" Type="Int32" />
-          <NavigationProperty Name="PSITS" Relationship="DBSysProjModel.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
-          <NavigationProperty Name="Student1" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student" ToRole="Student1" />
-          <NavigationProperty Name="Student2" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+          <NavigationProperty Name="PSITS" Relationship="Self.FK_Student_PSITS" FromRole="Student" ToRole="PSITS" />
+          <NavigationProperty Name="Student1" Relationship="Self.FK_Student_Student" FromRole="Student" ToRole="Student1" />
+          <NavigationProperty Name="Student2" Relationship="Self.FK_Student_Student" FromRole="Student1" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="VW_ADMIN3">
+          <Key>
+            <PropertyRef Name="PSITS_Officers" />
+            <PropertyRef Name="STUDENTs_Name" />
+          </Key>
+          <Property Name="PSITS_Officers" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STUDENTs_Name" Type="String" MaxLength="117" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vw_ViewAdmin1">
+          <Key>
+            <PropertyRef Name="PSITS_OFFICERS" />
+            <PropertyRef Name="STUDENTS" />
+            <PropertyRef Name="EVENTS" />
+          </Key>
+          <Property Name="PSITS_OFFICERS" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="STUDENTS" Type="String" MaxLength="169" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EVENTS" Type="String" MaxLength="92" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_Student_PSITS">
-          <End Type="DBSysProjModel.PSITS" Role="PSITS" Multiplicity="0..1" />
-          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="*" />
+          <End Role="PSITS" Type="Self.PSITS" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PSITS">
               <PropertyRef Name="psitsID" />
@@ -194,8 +226,8 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Student">
-          <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="DBSysProjModel.Student" Role="Student1" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student1" Type="Self.Student" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="studentID" />
@@ -205,90 +237,120 @@ warning 6002: The table/view 'DBSysProj.dbo.vw_ViewPsits1' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vw_ViewAdmin1">
+        <EntityContainer Name="DBSysProjEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="PSITS" EntityType="Self.PSITS" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="VW_ADMIN3" EntityType="Self.VW_ADMIN3" />
+          <EntitySet Name="vw_ViewAdmin1" EntityType="Self.vw_ViewAdmin1" />
+          <AssociationSet Name="FK_Student_PSITS" Association="Self.FK_Student_PSITS">
+            <End Role="PSITS" EntitySet="PSITS" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Student" Association="Self.FK_Student_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Student1" EntitySet="Student" />
+          </AssociationSet>
+          <FunctionImport Name="sp_DeletePsits">
+          <Parameter Name="pId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteStudent">
+          <Parameter Name="sId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="VW_PSITS4" EntityType="DBSysProjModel.VW_PSITS4" />
+        </EntityContainer>
+        <EntityType Name="VW_PSITS4">
           <Key>
-            <PropertyRef Name="PSITS_OFFICERS" />
-            <PropertyRef Name="STUDENTS" />
-            <PropertyRef Name="EVENTS" />
+            <PropertyRef Name="studentID" />
+            <PropertyRef Name="STUDENTs_Name" />
           </Key>
-          <Property Name="PSITS_OFFICERS" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
-          <Property Name="STUDENTS" Type="String" Nullable="false" MaxLength="169" FixedLength="false" Unicode="true" />
-          <Property Name="EVENTS" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="vw_ViewPsits1">
-          <Key>
-            <PropertyRef Name="Students" />
-          </Key>
-          <Property Name="Students" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+          <Property Name="studentID" Type="Int32" Nullable="false" />
+          <Property Name="STUDENTs_Name" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+          <Property Name="COURSE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EventDate" Type="DateTime" Precision="3" />
         </EntityType>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBSysProjModelStoreContainer" CdmEntityContainer="DBSysProjEntities1">
+        <EntityContainerMapping StorageEntityContainer="DBSysProjModelStoreContainer" CdmEntityContainer="DBSysProjEntities2">
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="DBSysProjModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
                 <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="DBSysProjModel.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
-                <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PSITS">
             <EntityTypeMapping TypeName="DBSysProjModel.PSITS">
               <MappingFragment StoreEntitySet="PSITS">
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="psitsID" ColumnName="psitsID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="DBSysProjModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="eventId" ColumnName="eventId" />
-                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
                 <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="psitsId" ColumnName="psitsId" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_ADMIN3">
+            <EntityTypeMapping TypeName="DBSysProjModel.VW_ADMIN3">
+              <MappingFragment StoreEntitySet="VW_ADMIN3">
+                <ScalarProperty Name="PSITS_Officers" ColumnName="PSITS_Officers" />
+                <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
+                <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ViewAdmin1">
+            <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewAdmin1">
+              <MappingFragment StoreEntitySet="vw_ViewAdmin1">
+                <ScalarProperty Name="PSITS_OFFICERS" ColumnName="PSITS_OFFICERS" />
+                <ScalarProperty Name="STUDENTS" ColumnName="STUDENTS" />
+                <ScalarProperty Name="EVENTS" ColumnName="EVENTS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_DeletePsits" FunctionName="DBSysProjModel.Store.sp_DeletePsits" />
-          <EntitySetMapping Name="vw_ViewAdmin1">
-            <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewAdmin1">
-              <MappingFragment StoreEntitySet="vw_ViewAdmin1">
-                <ScalarProperty Name="EVENTS" ColumnName="EVENTS" />
-                <ScalarProperty Name="STUDENTS" ColumnName="STUDENTS" />
-                <ScalarProperty Name="PSITS_OFFICERS" ColumnName="PSITS_OFFICERS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_ViewPsits1">
-            <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewPsits1">
-              <MappingFragment StoreEntitySet="vw_ViewPsits1">
+          <FunctionImportMapping FunctionImportName="sp_DeleteStudent" FunctionName="DBSysProjModel.Store.sp_DeleteStudent" />
+          <EntitySetMapping Name="VW_PSITS4">
+            <EntityTypeMapping TypeName="DBSysProjModel.VW_PSITS4">
+              <MappingFragment StoreEntitySet="VW_PSITS4">
                 <ScalarProperty Name="EventDate" ColumnName="EventDate" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
-                <ScalarProperty Name="Students" ColumnName="Students" />
+                <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+                <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

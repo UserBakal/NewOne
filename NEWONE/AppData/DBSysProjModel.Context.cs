@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.Model
+namespace NEWONE.AppData
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace NEWONE.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class DBSysProjEntities1 : DbContext
+    public partial class DBSysProjEntities2 : DbContext
     {
-        public DBSysProjEntities1()
-            : base("name=DBSysProjEntities1")
+        public DBSysProjEntities2()
+            : base("name=DBSysProjEntities2")
         {
         }
     
@@ -31,8 +31,9 @@ namespace NEWONE.Model
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<PSITS> PSITS { get; set; }
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<VW_ADMIN3> VW_ADMIN3 { get; set; }
         public virtual DbSet<vw_ViewAdmin1> vw_ViewAdmin1 { get; set; }
-        public virtual DbSet<vw_ViewPsits1> vw_ViewPsits1 { get; set; }
+        public virtual DbSet<VW_PSITS4> VW_PSITS4 { get; set; }
     
         public virtual int sp_DeletePsits(Nullable<int> pId)
         {
@@ -41,6 +42,15 @@ namespace NEWONE.Model
                 new ObjectParameter("pId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeletePsits", pIdParameter);
+        }
+    
+        public virtual int sp_DeleteStudent(Nullable<int> sId)
+        {
+            var sIdParameter = sId.HasValue ?
+                new ObjectParameter("sId", sId) :
+                new ObjectParameter("sId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteStudent", sIdParameter);
         }
     }
 }

@@ -55,11 +55,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Admin.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="AppData\Admin.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Event.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="AppData\DBSysProjModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBSysProjModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\DBSysProjModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\DBSysProjModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBSysProjModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Event.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\PSITS.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\Student.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\VW_ADMIN3.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\VW_PSITS4.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\vw_ViewAdmin1.cs">
+      <DependentUpon>DBSysProjModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -85,36 +115,9 @@
     <Compile Include="Forms\Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\vw_ViewAdmin1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\vw_ViewPsits1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\PSITS.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\Class1.cs" />
-    <Compile Include="Model\Student.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utils\Constant.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -137,12 +140,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="Model\Model1.edmx">
+    <EntityDeploy Include="AppData\DBSysProjModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBSysProjModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="AppData\DBSysProjModel.edmx.diagram">
+      <DependentUpon>DBSysProjModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -162,18 +165,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AppData\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Model1.Context.tt">
+    <Content Include="AppData\DBSysProjModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>DBSysProjModel.edmx</DependentUpon>
+      <LastGenOutput>DBSysProjModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Model1.tt">
+    <Content Include="AppData\DBSysProjModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>DBSysProjModel.edmx</DependentUpon>
+      <LastGenOutput>DBSysProjModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

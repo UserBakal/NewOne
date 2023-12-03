@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBSysProjModelStoreContainer" CdmEntityContainer="DBSysProjEntities2">
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="DBSysProjModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="DBSysProjModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PSITS">
+      <EntityTypeMapping TypeName="DBSysProjModel.PSITS">
+        <MappingFragment StoreEntitySet="PSITS">
+          <ScalarProperty Name="psitsID" ColumnName="psitsID" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="DBSysProjModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="psitsId" ColumnName="psitsId" />
+          <ScalarProperty Name="eventId" ColumnName="eventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_ADMIN3">
+      <EntityTypeMapping TypeName="DBSysProjModel.VW_ADMIN3">
+        <MappingFragment StoreEntitySet="VW_ADMIN3">
+          <ScalarProperty Name="PSITS_Officers" ColumnName="PSITS_Officers" />
+          <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
+          <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_ViewAdmin1">
+      <EntityTypeMapping TypeName="DBSysProjModel.vw_ViewAdmin1">
+        <MappingFragment StoreEntitySet="vw_ViewAdmin1">
+          <ScalarProperty Name="PSITS_OFFICERS" ColumnName="PSITS_OFFICERS" />
+          <ScalarProperty Name="STUDENTS" ColumnName="STUDENTS" />
+          <ScalarProperty Name="EVENTS" ColumnName="EVENTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_DeletePsits" FunctionName="DBSysProjModel.Store.sp_DeletePsits" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteStudent" FunctionName="DBSysProjModel.Store.sp_DeleteStudent" />
+    <EntitySetMapping Name="VW_PSITS4">
+      <EntityTypeMapping TypeName="DBSysProjModel.VW_PSITS4">
+        <MappingFragment StoreEntitySet="VW_PSITS4">
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+          <ScalarProperty Name="STUDENTs_Name" ColumnName="STUDENTs_Name" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

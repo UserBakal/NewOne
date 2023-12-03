@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NEWONE.Model
+namespace NEWONE.AppData
 {
     using System;
     using System.Collections.Generic;

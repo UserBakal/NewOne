@@ -1,4 +1,4 @@
-﻿using NEWONE.Model;
+﻿using NEWONE.AppData;
 using NEWONE.Repositories;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace NEWONE
 
             UserInfo userInfo = new UserInfo();
             var filteredData = userInfo.combinedViews1()
-                                  .Where(row => row.PSITS_OFFICERS.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                                  .Where(row => row.PSITS_Officers.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
                                   .ToList();
 
             grid2.DataSource = filteredData;

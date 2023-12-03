@@ -7,18 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NEWONE.Model;
+using NEWONE.AppData;
+using NEWONE.AppData;
 
 
 namespace NEWONE
 {
     public partial class Form2 : Form
     {
-        DBSysProjEntities1 db;
+        DBSysProjEntities2 db;
         public Form2()
         {
             InitializeComponent();
-            db = new DBSysProjEntities1();
+            db = new DBSysProjEntities2();
         }
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -28,7 +29,7 @@ namespace NEWONE
 
         private void loadOfficer()
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
             { 
                 var officer = db.PSITS.ToList();
 
@@ -39,7 +40,7 @@ namespace NEWONE
         }
         private void loadEvents() 
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
                 {
                     var Events = db.Event.ToList();
 
@@ -72,7 +73,7 @@ namespace NEWONE
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            using (db = new DBSysProjEntities1())
+            using (db = new DBSysProjEntities2())
             {
                 if (String.IsNullOrEmpty(txtIdNum.Text))
                 {
