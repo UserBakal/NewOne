@@ -18,19 +18,19 @@ namespace NEWONE.Repositories
         {
             db = new DBSysProjEntities1();
         }
-        public List<CombinedView> combinedViews1()
+        public List<vw_ViewAdmin1> combinedViews1()
         {
             using (db = new DBSysProjEntities1())
             {
-                return db.CombinedView.ToList();
+                return db.vw_ViewAdmin1.ToList();
             }
         }
 
-        public List<vw_ViewPsits> vw_ViewPsits()
+        public List<vw_ViewPsits1> vw_ViewPsits()
         {
             using (db = new DBSysProjEntities1())
             {
-                return db.vw_ViewPsits.ToList();
+                return db.vw_ViewPsits1.ToList();
             }
         }
         public ErrorCode DeletePsitsUsingStoredProf(int sId, ref String szResponse)

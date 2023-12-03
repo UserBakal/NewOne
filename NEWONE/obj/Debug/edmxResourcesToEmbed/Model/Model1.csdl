@@ -5,7 +5,6 @@
     <EntitySet Name="Event" EntityType="DBSysProjModel.Event" />
     <EntitySet Name="PSITS" EntityType="DBSysProjModel.PSITS" />
     <EntitySet Name="Student" EntityType="DBSysProjModel.Student" />
-    <EntitySet Name="CombinedView" EntityType="DBSysProjModel.CombinedView" />
     <AssociationSet Name="FK_Student_PSITS" Association="DBSysProjModel.FK_Student_PSITS">
       <End Role="PSITS" EntitySet="PSITS" />
       <End Role="Student" EntitySet="Student" />
@@ -17,7 +16,8 @@
     <FunctionImport Name="sp_DeletePsits">
       <Parameter Name="pId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="vw_ViewPsits" EntityType="DBSysProjModel.vw_ViewPsits" />
+    <EntitySet Name="vw_ViewAdmin1" EntityType="DBSysProjModel.vw_ViewAdmin1" />
+    <EntitySet Name="vw_ViewPsits1" EntityType="DBSysProjModel.vw_ViewPsits1" />
   </EntityContainer>
   <EntityType Name="Admin">
     <Key>
@@ -59,21 +59,6 @@
     <NavigationProperty Name="Student1" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student" ToRole="Student1" />
     <NavigationProperty Name="Student2" Relationship="DBSysProjModel.FK_Student_Student" FromRole="Student1" ToRole="Student" />
   </EntityType>
-  <EntityType Name="CombinedView">
-    <Key>
-      <PropertyRef Name="studentID" />
-    </Key>
-    <Property Name="studentID" Type="Int32" Nullable="false" />
-    <Property Name="Student_IDNumber" Type="Int32" />
-    <Property Name="Student_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Student_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Event_ID" Type="Int32" />
-    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EventDate" Type="DateTime" Precision="3" />
-    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <Association Name="FK_Student_PSITS">
     <End Type="DBSysProjModel.PSITS" Role="PSITS" Multiplicity="0..1" />
     <End Type="DBSysProjModel.Student" Role="Student" Multiplicity="*" />
@@ -98,17 +83,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="vw_ViewPsits">
+  <EntityType Name="vw_ViewAdmin1">
     <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Name" />
+      <PropertyRef Name="PSITS_OFFICERS" />
+      <PropertyRef Name="STUDENTS" />
+      <PropertyRef Name="EVENTS" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Id_Number" Type="Int32" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
-    <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Event_Id" Type="Int32" />
-    <Property Name="Event_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Event_Date" Type="DateTime" Precision="3" />
+    <Property Name="PSITS_OFFICERS" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" />
+    <Property Name="STUDENTS" Type="String" Nullable="false" MaxLength="169" FixedLength="false" Unicode="true" />
+    <Property Name="EVENTS" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_ViewPsits1">
+    <Key>
+      <PropertyRef Name="Students" />
+    </Key>
+    <Property Name="Students" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

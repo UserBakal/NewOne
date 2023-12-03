@@ -12,17 +12,10 @@ namespace NEWONE.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CombinedView
+    public partial class vw_ViewPsits1
     {
-        public int studentID { get; set; }
-        public Nullable<int> Student_IDNumber { get; set; }
-        public string Student_FirstName { get; set; }
-        public string Student_LastName { get; set; }
-        public string Course { get; set; }
-        public Nullable<int> Event_ID { get; set; }
+        public string Students { get; set; }
         public string EventName { get; set; }
         public Nullable<System.DateTime> EventDate { get; set; }
-        public string Position { get; set; }
-        public string Name { get; set; }
     }
 }

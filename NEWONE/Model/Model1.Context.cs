@@ -31,8 +31,8 @@ namespace NEWONE.Model
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<PSITS> PSITS { get; set; }
         public virtual DbSet<Student> Student { get; set; }
-        public virtual DbSet<CombinedView> CombinedView { get; set; }
-        public virtual DbSet<vw_ViewPsits> vw_ViewPsits { get; set; }
+        public virtual DbSet<vw_ViewAdmin1> vw_ViewAdmin1 { get; set; }
+        public virtual DbSet<vw_ViewPsits1> vw_ViewPsits1 { get; set; }
     
         public virtual int sp_DeletePsits(Nullable<int> pId)
         {

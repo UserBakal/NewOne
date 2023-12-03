@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NEWONE.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace NEWONE
 {
@@ -24,7 +25,7 @@ namespace NEWONE
         public void loadgrid()
         {
             UserInfo userInfo = new UserInfo();
-            grid2.DataSource = userInfo.vw_ViewPsits();
+            grid1.DataSource = userInfo.vw_ViewPsits();
         }
         private void Form3_Load(object sender, EventArgs e)
         {
@@ -58,7 +59,10 @@ namespace NEWONE
 
         private void grid2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtStudentId.Text = grid2.Rows[e.RowIndex].Cells["Id"].Value.ToString();
+            if (e.RowIndex >= 0 && e.RowIndex < grid1.Rows.Count)
+            {
+                txtStudentId.Text = grid1.Rows[e.RowIndex].Cells["Students"].Value?.ToString();
+            }
         }
 
         private void grid2_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -74,7 +78,14 @@ namespace NEWONE
 
         private void txtStudentId_TextChanged(object sender, EventArgs e)
         {
-            
+            string searchText = txtStudentId.Text.Trim();
+
+            UserInfo userInfo = new UserInfo();
+            var filteredData = userInfo.vw_ViewPsits()
+                                  .Where(row => row.Students.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                                  .ToList();
+
+            grid1.DataSource = filteredData;
         }
 
 

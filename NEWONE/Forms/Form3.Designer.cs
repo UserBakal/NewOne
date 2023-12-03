@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grid2 = new System.Windows.Forms.DataGridView();
+            this.grid1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txtStudentId = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.hOMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.grid2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grid2
+            // grid1
             // 
-            this.grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid2.Location = new System.Drawing.Point(12, 36);
-            this.grid2.Name = "grid2";
-            this.grid2.RowHeadersWidth = 62;
-            this.grid2.RowTemplate.Height = 28;
-            this.grid2.Size = new System.Drawing.Size(527, 597);
-            this.grid2.TabIndex = 0;
-            this.grid2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid2_CellClick);
-            this.grid2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid2_CellContentClick);
+            this.grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid1.Location = new System.Drawing.Point(12, 36);
+            this.grid1.Name = "grid1";
+            this.grid1.RowHeadersWidth = 62;
+            this.grid1.RowTemplate.Height = 28;
+            this.grid1.Size = new System.Drawing.Size(527, 597);
+            this.grid1.TabIndex = 0;
+            this.grid1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid2_CellClick);
+            this.grid1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid2_CellContentClick);
             // 
             // button2
             // 
@@ -107,14 +107,14 @@
             this.Controls.Add(this.txtStudentId);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.grid2);
+            this.Controls.Add(this.grid1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.grid2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -124,7 +124,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView grid2;
+        private System.Windows.Forms.DataGridView grid1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox txtStudentId;

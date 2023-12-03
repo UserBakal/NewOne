@@ -9,11 +9,11 @@
         <EntityTypeShape EntityType="DBSysProjModel.Event" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="DBSysProjModel.PSITS" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="DBSysProjModel.Student" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="DBSysProjModel.CombinedView" Width="1.5" PointX="4.75" PointY="4.75" />
         <AssociationConnector Association="DBSysProjModel.FK_Student_PSITS" />
         <AssociationConnector Association="DBSysProjModel.FK_Student_Student" />
-        <EntityTypeShape EntityType="DBSysProjModel.vw_ViewPsits" Width="1.5" PointX="5.375" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="DBSysProjModel.vw_ViewAdmin1" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSysProjModel.vw_ViewPsits1" Width="1.5" PointX="5.375" PointY="3.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
